@@ -1,0 +1,865 @@
+17:31:22,892 graphrag.cli.index INFO Logging enabled at G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag_ollama\logs\indexing-engine.log
+17:31:25,935 httpx INFO HTTP Request: POST http://localhost:11434/api/generate/chat/completions "HTTP/1.1 404 Not Found"
+17:47:34,995 graphrag.cli.index INFO Logging enabled at G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag_ollama\logs\indexing-engine.log
+17:47:36,768 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:48:37,9 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+17:48:37,15 graphrag.cli.index INFO Starting pipeline run. dry_run=False
+17:48:37,16 graphrag.cli.index INFO Using default configuration: {
+    "root_dir": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama",
+    "models": {
+        "default_chat_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "openai_chat",
+            "model": "llama3.2:1b",
+            "encoding_model": "cl100k_base",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": true,
+            "request_timeout": 180.0,
+            "tokens_per_minute": "auto",
+            "requests_per_minute": "auto",
+            "retry_strategy": "native",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        },
+        "default_embedding_model": {
+            "api_key": "==== REDACTED ====",
+            "auth_type": "api_key",
+            "type": "openai_embedding",
+            "model": "bge-m3:latest",
+            "encoding_model": "cl100k_base",
+            "api_base": "http://localhost:11434/v1",
+            "api_version": null,
+            "deployment_name": null,
+            "proxy": null,
+            "audience": null,
+            "model_supports_json": true,
+            "request_timeout": 180.0,
+            "tokens_per_minute": "auto",
+            "requests_per_minute": "auto",
+            "retry_strategy": "native",
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "concurrent_requests": 25,
+            "async_mode": "threaded",
+            "responses": null,
+            "max_tokens": null,
+            "temperature": 0,
+            "max_completion_tokens": null,
+            "reasoning_effort": null,
+            "top_p": 1,
+            "n": 1,
+            "frequency_penalty": 0.0,
+            "presence_penalty": 0.0
+        }
+    },
+    "input": {
+        "storage": {
+            "type": "file",
+            "base_dir": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama\\input",
+            "storage_account_blob_url": null,
+            "cosmosdb_account_url": null
+        },
+        "file_type": "text",
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "text_column": "text",
+        "title_column": null,
+        "metadata": null
+    },
+    "chunks": {
+        "size": 100,
+        "overlap": 20,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": "tokens",
+        "encoding_model": "cl100k_base",
+        "prepend_metadata": false,
+        "chunk_size_includes_metadata": false
+    },
+    "output": {
+        "type": "file",
+        "base_dir": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama\\output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "outputs": null,
+    "update_index_output": {
+        "type": "file",
+        "base_dir": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama\\update_output",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "cache",
+        "storage_account_blob_url": null,
+        "cosmosdb_account_url": null
+    },
+    "reporting": {
+        "type": "file",
+        "base_dir": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama\\logs",
+        "storage_account_blob_url": null
+    },
+    "vector_store": {
+        "default_vector_store": {
+            "type": "lancedb",
+            "db_uri": "G:\\code\\online-code\\env-data\\data\\ZeroGraphRAG\\graphrag\\graphrag_ollama\\output\\lancedb",
+            "url": null,
+            "audience": null,
+            "container_name": "==== REDACTED ====",
+            "database_name": null,
+            "overwrite": true
+        }
+    },
+    "workflows": null,
+    "embed_text": {
+        "model_id": "default_embedding_model",
+        "vector_store_id": "default_vector_store",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "names": [
+            "entity.description",
+            "community.full_content",
+            "text_unit.text"
+        ],
+        "strategy": null
+    },
+    "extract_graph": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_graph.txt",
+        "entity_types": [
+            "organization",
+            "person",
+            "geo",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "model_id": "default_chat_model",
+        "prompt": "prompts/summarize_descriptions.txt",
+        "max_length": 500,
+        "max_input_tokens": 4000,
+        "strategy": null
+    },
+    "extract_graph_nlp": {
+        "normalize_edge_weights": true,
+        "text_analyzer": {
+            "extractor_type": "regex_english",
+            "model_name": "en_core_web_md",
+            "max_word_length": 15,
+            "word_delimiter": " ",
+            "include_named_entities": true,
+            "exclude_nouns": [
+                "stuff",
+                "thing",
+                "things",
+                "bunch",
+                "bit",
+                "bits",
+                "people",
+                "person",
+                "okay",
+                "hey",
+                "hi",
+                "hello",
+                "laughter",
+                "oh"
+            ],
+            "exclude_entity_tags": [
+                "DATE"
+            ],
+            "exclude_pos_tags": [
+                "DET",
+                "PRON",
+                "INTJ",
+                "X"
+            ],
+            "noun_phrase_tags": [
+                "PROPN",
+                "NOUNS"
+            ],
+            "noun_phrase_grammars": {
+                "PROPN,PROPN": "PROPN",
+                "NOUN,NOUN": "NOUNS",
+                "NOUNS,NOUN": "NOUNS",
+                "ADJ,ADJ": "ADJ",
+                "ADJ,NOUN": "NOUNS"
+            }
+        },
+        "concurrent_requests": 25
+    },
+    "prune_graph": {
+        "min_node_freq": 2,
+        "max_node_freq_std": null,
+        "min_node_degree": 1,
+        "max_node_degree_std": null,
+        "min_edge_weight_pct": 40.0,
+        "remove_ego_nodes": true,
+        "lcc_only": false
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "use_lcc": true,
+        "seed": 3735928559
+    },
+    "extract_claims": {
+        "enabled": false,
+        "model_id": "default_chat_model",
+        "prompt": "prompts/extract_claims.txt",
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "community_reports": {
+        "model_id": "default_chat_model",
+        "graph_prompt": "prompts/community_report_graph.txt",
+        "text_prompt": "prompts/community_report_text.txt",
+        "max_length": 2000,
+        "max_input_length": 8000,
+        "strategy": null
+    },
+    "embed_graph": {
+        "enabled": false,
+        "dimensions": 1536,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "use_lcc": true
+    },
+    "umap": {
+        "enabled": false
+    },
+    "snapshots": {
+        "embeddings": false,
+        "graphml": false,
+        "raw_graph": false
+    },
+    "local_search": {
+        "prompt": "prompts/local_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "text_unit_prop": 0.5,
+        "community_prop": 0.15,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "max_context_tokens": 12000
+    },
+    "global_search": {
+        "map_prompt": "prompts/global_search_map_system_prompt.txt",
+        "reduce_prompt": "prompts/global_search_reduce_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "knowledge_prompt": "prompts/global_search_knowledge_system_prompt.txt",
+        "max_context_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_length": 1000,
+        "reduce_max_length": 2000,
+        "dynamic_search_threshold": 1,
+        "dynamic_search_keep_parent": false,
+        "dynamic_search_num_repeats": 1,
+        "dynamic_search_use_summary": false,
+        "dynamic_search_max_level": 2
+    },
+    "drift_search": {
+        "prompt": "prompts/drift_search_system_prompt.txt",
+        "reduce_prompt": "prompts/drift_search_reduce_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "data_max_tokens": 12000,
+        "reduce_max_tokens": null,
+        "reduce_temperature": 0,
+        "reduce_max_completion_tokens": null,
+        "concurrency": 32,
+        "drift_k_followups": 20,
+        "primer_folds": 5,
+        "primer_llm_max_tokens": 12000,
+        "n_depth": 3,
+        "local_search_text_unit_prop": 0.9,
+        "local_search_community_prop": 0.1,
+        "local_search_top_k_mapped_entities": 10,
+        "local_search_top_k_relationships": 10,
+        "local_search_max_data_tokens": 12000,
+        "local_search_temperature": 0,
+        "local_search_top_p": 1,
+        "local_search_n": 1,
+        "local_search_llm_max_gen_tokens": null,
+        "local_search_llm_max_gen_completion_tokens": null
+    },
+    "basic_search": {
+        "prompt": "prompts/basic_search_system_prompt.txt",
+        "chat_model_id": "default_chat_model",
+        "embedding_model_id": "default_embedding_model",
+        "k": 10,
+        "max_context_tokens": 12000
+    }
+}
+17:48:37,17 graphrag.storage.file_pipeline_storage INFO Creating file storage at G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag_ollama\input
+17:48:37,17 graphrag.storage.file_pipeline_storage INFO Creating file storage at G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag_ollama\output
+17:48:37,22 graphrag.storage.file_pipeline_storage INFO search G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag_ollama\input for files matching .*\.txt$
+17:48:37,25 graphrag.index.input.util INFO Found 1 InputFileType.text files, loading 1
+17:48:37,25 graphrag.index.input.util INFO Total number of unfiltered InputFileType.text rows: 1
+17:48:37,25 graphrag.index.workflows.load_input_documents INFO Final # of rows loaded: 1
+17:48:37,60 graphrag.utils.storage INFO reading table from storage: documents.parquet
+17:48:37,110 graphrag.utils.storage INFO reading table from storage: documents.parquet
+17:48:37,112 graphrag.utils.storage INFO reading table from storage: text_units.parquet
+17:48:37,142 graphrag.utils.storage INFO reading table from storage: text_units.parquet
+17:51:37,232 openai._base_client INFO Retrying request to /chat/completions in 0.499832 seconds
+17:51:51,158 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:51:55,948 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:52:37,213 openai._base_client INFO Retrying request to /chat/completions in 0.486194 seconds
+17:52:42,240 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:52:45,489 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:54:14,57 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:54:44,792 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:55:37,734 openai._base_client INFO Retrying request to /chat/completions in 0.968518 seconds
+17:55:43,641 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:55:45,282 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:56:45,775 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:57:46,946 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:58:42,685 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+17:59:51,462 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:00:43,392 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:02:42,516 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:03:41,505 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:04:37,375 openai._base_client INFO Retrying request to /chat/completions in 0.479202 seconds
+18:04:48,363 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:05:03,210 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:06:14,475 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:07:45,395 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:08:40,180 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:09:37,464 openai._base_client INFO Retrying request to /chat/completions in 0.490925 seconds
+18:09:45,577 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:09:50,12 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:11:51,368 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:13:37,503 openai._base_client INFO Retrying request to /chat/completions in 0.459066 seconds
+18:14:15,163 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+18:15:37,540 openai._base_client INFO Retrying request to /chat/completions in 0.460769 seconds
+18:18:38,34 openai._base_client INFO Retrying request to /chat/completions in 0.903384 seconds
+18:21:38,962 openai._base_client INFO Retrying request to /chat/completions in 1.978820 seconds
+18:24:40,978 openai._base_client INFO Retrying request to /chat/completions in 3.952310 seconds
+18:27:44,960 openai._base_client INFO Retrying request to /chat/completions in 7.480678 seconds
+18:30:52,486 openai._base_client INFO Retrying request to /chat/completions in 6.217445 seconds
+18:32:42,158 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:12:15,524 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:15:31,707 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:18:20,733 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:19:15,712 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:20:15,595 openai._base_client INFO Retrying request to /chat/completions in 0.485225 seconds
+19:20:15,709 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:21:28,804 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:22:21,369 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:23:16,95 openai._base_client INFO Retrying request to /chat/completions in 0.972257 seconds
+19:23:26,739 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:24:40,863 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:25:29,138 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:26:17,81 openai._base_client INFO Retrying request to /chat/completions in 1.984931 seconds
+19:29:15,596 openai._base_client INFO Retrying request to /chat/completions in 0.417225 seconds
+19:29:16,931 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:29:19,68 openai._base_client INFO Retrying request to /chat/completions in 3.567597 seconds
+19:29:25,485 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:29:27,870 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:29:37,837 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:30:21,598 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:31:24,862 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:32:16,792 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:32:22,656 openai._base_client INFO Retrying request to /chat/completions in 6.740734 seconds
+19:33:15,788 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:33:18,872 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:34:23,989 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:35:18,772 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:37:22,349 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:38:34,468 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:39:27,107 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:41:16,68 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:43:21,886 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:47:15,687 openai._base_client INFO Retrying request to /chat/completions in 0.479503 seconds
+19:50:16,162 openai._base_client INFO Retrying request to /chat/completions in 0.988878 seconds
+19:53:15,708 openai._base_client INFO Retrying request to /chat/completions in 0.453947 seconds
+19:53:17,150 openai._base_client INFO Retrying request to /chat/completions in 1.924425 seconds
+19:53:27,159 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:53:36,301 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:55:15,695 openai._base_client INFO Retrying request to /chat/completions in 0.390966 seconds
+19:55:24,285 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:56:21,12 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+19:57:19,681 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:01:16,894 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:05:15,706 openai._base_client INFO Retrying request to /chat/completions in 0.491819 seconds
+20:05:20,414 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:05:26,226 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:07:28,445 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:09:15,703 openai._base_client INFO Retrying request to /chat/completions in 0.422537 seconds
+20:09:19,732 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:12:16,136 openai._base_client INFO Retrying request to /chat/completions in 0.854964 seconds
+20:12:28,292 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:12:49,356 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:12:57,769 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:13:15,708 openai._base_client INFO Retrying request to /chat/completions in 0.486269 seconds
+20:13:27,912 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:13:28,92 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:17:15,717 openai._base_client INFO Retrying request to /chat/completions in 0.483025 seconds
+20:20:16,196 openai._base_client INFO Retrying request to /chat/completions in 0.814675 seconds
+20:20:20,138 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:20:23,285 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:24:23,439 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:31:22,940 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:32:20,859 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:33:42,499 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:34:20,54 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:35:19,899 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:39:29,714 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:40:29,548 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:41:15,778 openai._base_client INFO Retrying request to /chat/completions in 0.432572 seconds
+20:41:52,781 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:42:19,579 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:44:36,111 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:45:30,575 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:46:15,765 openai._base_client INFO Retrying request to /chat/completions in 0.472336 seconds
+20:46:26,340 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:47:29,153 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:49:16,246 openai._base_client INFO Retrying request to /chat/completions in 0.902636 seconds
+20:52:17,147 openai._base_client INFO Retrying request to /chat/completions in 1.579070 seconds
+20:52:24,531 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+20:55:18,731 openai._base_client INFO Retrying request to /chat/completions in 3.054842 seconds
+20:58:21,788 openai._base_client INFO Retrying request to /chat/completions in 7.646037 seconds
+21:01:29,448 openai._base_client INFO Retrying request to /chat/completions in 7.584963 seconds
+21:04:37,37 openai._base_client INFO Retrying request to /chat/completions in 6.678851 seconds
+21:07:43,719 openai._base_client INFO Retrying request to /chat/completions in 7.724372 seconds
+21:10:51,449 openai._base_client INFO Retrying request to /chat/completions in 7.998644 seconds
+21:13:59,451 openai._base_client INFO Retrying request to /chat/completions in 6.366658 seconds
+21:17:05,838 graphrag.callbacks.file_workflow_callbacks INFO Error Invoking LLM details={'prompt': 'MANY entities and relationships were missed in the last extraction. Remember to ONLY emit entities that match any of the previously extracted types. Add them below using the same format:\n', 'kwargs': {'history': [{'content': '\n-Goal-\nGiven a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.\n \n-Steps-\n1. Identify all entities. For each identified entity, extract the following information:\n- entity_name: Name of the entity, capitalized\n- entity_type: One of the following types: [organization,person,geo,event]\n- entity_description: Comprehensive description of the entity\'s attributes and activities\nFormat each entity as ("entity"<|><entity_name><|><entity_type><|><entity_description>)\n \n2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.\nFor each pair of related entities, extract the following information:\n- source_entity: name of the source entity, as identified in step 1\n- target_entity: name of the target entity, as identified in step 1\n- relationship_description: explanation as to why you think the source entity and the target entity are related to each other\n- relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity\n Format each relationship as ("relationship"<|><source_entity><|><target_entity><|><relationship_description><|><relationship_strength>)\n \n3. Return output in English as a single list of all the entities and relationships identified in steps 1 and 2. Use **##** as the list delimiter.\n \n4. When finished, output <|COMPLETE|>\n \n######################\n-Examples-\n######################\nExample 1:\nEntity_types: ORGANIZATION,PERSON\nText:\nThe Verdantis\'s Central Institution is scheduled to meet on Monday and Thursday, with the institution planning to release its latest policy decision on Thursday at 1:30 p.m. PDT, followed by a press conference where Central Institution Chair Martin Smith will take questions. Investors expect the Market Strategy Committee to hold its benchmark interest rate steady in a range of 3.5%-3.75%.\n######################\nOutput:\n("entity"<|>CENTRAL INSTITUTION<|>ORGANIZATION<|>The Central Institution is the Federal Reserve of Verdantis, which is setting interest rates on Monday and Thursday)\n##\n("entity"<|>MARTIN SMITH<|>PERSON<|>Martin Smith is the chair of the Central Institution)\n##\n("entity"<|>MARKET STRATEGY COMMITTEE<|>ORGANIZATION<|>The Central Institution committee makes key decisions about interest rates and the growth of Verdantis\'s money supply)\n##\n("relationship"<|>MARTIN SMITH<|>CENTRAL INSTITUTION<|>Martin Smith is the Chair of the Central Institution and will answer questions at a press conference<|>9)\n<|COMPLETE|>\n\n######################\nExample 2:\nEntity_types: ORGANIZATION\nText:\nTechGlobal\'s (TG) stock skyrocketed in its opening day on the Global Exchange Thursday. But IPO experts warn that the semiconductor corporation\'s debut on the public markets isn\'t indicative of how other newly listed companies may perform.\n\nTechGlobal, a formerly public company, was taken private by Vision Holdings in 2014. The well-established chip designer says it powers 85% of premium smartphones.\n######################\nOutput:\n("entity"<|>TECHGLOBAL<|>ORGANIZATION<|>TechGlobal is a stock now listed on the Global Exchange which powers 85% of premium smartphones)\n##\n("entity"<|>VISION HOLDINGS<|>ORGANIZATION<|>Vision Holdings is a firm that previously owned TechGlobal)\n##\n("relationship"<|>TECHGLOBAL<|>VISION HOLDINGS<|>Vision Holdings formerly owned TechGlobal from 2014 until present<|>5)\n<|COMPLETE|>\n\n######################\nExample 3:\nEntity_types: ORGANIZATION,GEO,PERSON\nText:\nFive Aurelians jailed for 8 years in Firuzabad and widely regarded as hostages are on their way home to Aurelia.\n\nThe swap orchestrated by Quintara was finalized when $8bn of Firuzi funds were transferred to financial institutions in Krohaara, the capital of Quintara.\n\nThe exchange initiated in Firuzabad\'s capital, Tiruzia, led to the four men and one woman, who are also Firuzi nationals, boarding a chartered flight to Krohaara.\n\nThey were welcomed by senior Aurelian officials and are now on their way to Aurelia\'s capital, Cashion.\n\nThe Aurelians include 39-year-old businessman Samuel Namara, who has been held in Tiruzia\'s Alhamia Prison, as well as journalist Durke Bataglani, 59, and environmentalist Meggie Tazbah, 53, who also holds Bratinas nationality.\n######################\nOutput:\n("entity"<|>FIRUZABAD<|>GEO<|>Firuzabad held Aurelians as hostages)\n##\n("entity"<|>AURELIA<|>GEO<|>Country seeking to release hostages)\n##\n("entity"<|>QUINTARA<|>GEO<|>Country that negotiated a swap of money in exchange for hostages)\n##\n##\n("entity"<|>TIRUZIA<|>GEO<|>Capital of Firuzabad where the Aurelians were being held)\n##\n("entity"<|>KROHAARA<|>GEO<|>Capital city in Quintara)\n##\n("entity"<|>CASHION<|>GEO<|>Capital city in Aurelia)\n##\n("entity"<|>SAMUEL NAMARA<|>PERSON<|>Aurelian who spent time in Tiruzia\'s Alhamia Prison)\n##\n("entity"<|>ALHAMIA PRISON<|>GEO<|>Prison in Tiruzia)\n##\n("entity"<|>DURKE BATAGLANI<|>PERSON<|>Aurelian journalist who was held hostage)\n##\n("entity"<|>MEGGIE TAZBAH<|>PERSON<|>Bratinas national and environmentalist who was held hostage)\n##\n("relationship"<|>FIRUZABAD<|>AURELIA<|>Firuzabad negotiated a hostage exchange with Aurelia<|>2)\n##\n("relationship"<|>QUINTARA<|>AURELIA<|>Quintara brokered the hostage exchange between Firuzabad and Aurelia<|>2)\n##\n("relationship"<|>QUINTARA<|>FIRUZABAD<|>Quintara brokered the hostage exchange between Firuzabad and Aurelia<|>2)\n##\n("relationship"<|>SAMUEL NAMARA<|>ALHAMIA PRISON<|>Samuel Namara was a prisoner at Alhamia prison<|>8)\n##\n("relationship"<|>SAMUEL NAMARA<|>MEGGIE TAZBAH<|>Samuel Namara and Meggie Tazbah were exchanged in the same hostage release<|>2)\n##\n("relationship"<|>SAMUEL NAMARA<|>DURKE BATAGLANI<|>Samuel Namara and Durke Bataglani were exchanged in the same hostage release<|>2)\n##\n("relationship"<|>MEGGIE TAZBAH<|>DURKE BATAGLANI<|>Meggie Tazbah and Durke Bataglani were exchanged in the same hostage release<|>2)\n##\n("relationship"<|>SAMUEL NAMARA<|>FIRUZABAD<|>Samuel Namara was a hostage in Firuzabad<|>2)\n##\n("relationship"<|>MEGGIE TAZBAH<|>FIRUZABAD<|>Meggie Tazbah was a hostage in Firuzabad<|>2)\n##\n("relationship"<|>DURKE BATAGLANI<|>FIRUZABAD<|>Durke Bataglani was a hostage in Firuzabad<|>2)\n<|COMPLETE|>\n\n######################\n-Real Data-\n######################\nEntity_types: organization,person,geo,event\nText: 而是轻蔑地对凡卡说：“穷小子，撞死活该！写封信——不贴邮票，不写收信人地址，谁给你寄！”\n\n说完，便用手一撕，再一撕，再撕，再撕……手一扬，风一吹，凡卡给爷爷写的信\n######################\nOutput:', 'role': 'user'}, {'role': 'assistant', 'content': '## Identified Entities and Relationships\n\n### Entities:\n\n1. **凡卡 (Vanilla Cake)** - ("entity"<|>凡卡<|>PERSON<|>Vanilla Cake is a person who wrote a letter to his grandfather)\n2. **穷小子 (Poor Little Boy)** - ("entity"<|>穷小子<|>ORGANIZATION<|>Poor Little Boy is an organization that was written about in the text)\n3. **撞死活该 (Doomed to Live) - ("entity"<|>撞死活该<|>EVENT<|>Doomed to live is an event mentioned in the text)\n4. **写封信 (Writing a Letter)** - ("entity"<|>写封信<|>ACTION<|>Writing a letter is an action described in the text)\n5. **不贴邮票 (Not Putting Postage Stamps)** - ("entity"<|>不贴邮票<|>ACTION<|>Not putting postage stamps is an action mentioned in the text)\n6. **谁给你寄? (Who Will Give You a Letter?)** - ("entity"<|>谁给你寄?<|>INTERROGATION<|>Who will give you a letter?)\n7. **爷爷 (Grandfather)** - ("entity"<|>爷爷<|>PERSON<|>Grandfather is a person mentioned in the text)\n8. **风一吹 (Wind Blows)** - ("entity"<|>风一吹<|>ACTION<|>The wind blows is an action described in the text)\n\n### Relationships:\n\n1. **Vanilla Cake and Poor Little Boy are related** - ("relationship"<|>凡卡<|>POOR LITTLE BOY<|>Vanilla Cake and Poor Little Boy are clearly related because Vanilla Cake wrote a letter to his grandfather, Poor Little Boy)\n2. **Poor Little Boy and Doomed to Live are related** - ("relationship"<|>凡卡<|>DOOMED TO LIVE<|>POOR LITTLE BOY<|>Poor Little Boy is an event mentioned in the text, so they are clearly related because Poor Little Boy was written about in the text)\n3. **Doomed to Live and Writing a Letter are related** - ("relationship"<|>DOOMED TO LIVE<|>WRITING A LETTER<|>Writing a letter is an action described in the text, so they are clearly related because writing a letter is part of the process of Doomed to Live)\n4. **Vanilla Cake and Who Will Give You a Letter? are related** - ("relationship"<|>凡卡<|>WHO WILL GIVE YOU A LETTER?<|>INTERROGATION<|>Who will give you a letter?)\n5. **Poor Little Boy and Who Will Give You a Letter? are related** - ("relationship"<|>POOR LITTLE BOY<|>WHO WILL GIVE YOU A LETTER?<|>INTERROGATION<|>Who will give you a letter?")\n6. **Doomed to Live and Who Will Give You a Letter? are related** - ("relationship"<|>DOOMED TO LIVE<|>WHO WILL GIVE YOU A LETTER?<|>INTERROGATION<|>Who will give you a letter?")\n7. **Writing a Letter and Who Will Give You a Letter? are related** - ("relationship"<|>WRITING A LETTER<|>WHO WILL GIVE YOU A LETTER?<|>INTERROGATION<|>Who will give you a letter?")\n8. **Vanilla Cake, Poor Little Boy, and Who Will Give You a Letter? are all related to the same event** - ("relationship"<|>凡卡<|>POOR LITTLE BOY<|>WHO WILL GIVE YOU A LETTER?<|>INTERROGATION<|>Who will give you a letter?")\n9. **Vanilla Cake, Poor Little Boy, and Doomed to Live are all related to the same event** - ("relationship"<|>凡卡<|>POOR LITTLE BOY<|>DOOMED TO LIVE<|>Vanilla Cake wrote a letter to his grandfather, Poor Little Boy is an event mentioned in the text, so they are clearly related because Poor Little Boy was written about in the text)\n10. **Poor Little Boy and Doomed to Live are all related to the same person** - ("relationship"<|>凡卡<|>POOR LITTLE BOY<|>DOOMED TO LIVE<|>Vanilla Cake wrote a letter to his grandfather, Poor Little Boy is an event mentioned in the text, so they are clearly related because Poor Little Boy was written about in the text)\n\n### Output:\n\n## ## ["entity"<|>凡卡<|>PERSON<|>Vanilla Cake is a person who wrote a letter to his grandfather", \n "entity"<|>凡卡<|>PERSON<|>Poor Little Boy is an organization that was written about in the text", \n "entity"<|>凡卡<|>ORGANIZATION<|>Vanilla Cake is an organization that wrote a letter to his grandfather", \n "entity"<|> Poor Little Boy is an event mentioned in the text", \n "entity"<|> Poor Little Boy is an action described in the text", \n "entity"<|> Poor Little Boy is part of the process of Doomed to Live", \n "entity"<|> Poor Little Boy is clearly related to Doomed to Live because Poor Little Boy was written about in the text", \n "entity"<|> Poor Little Boy and Who Will Give You a Letter? are clearly related because Poor Little Boy was written about in the text", \n "entity"<|> Poor Little Boy and Who Will Give You a Letter? are part of the same event", \n "entity"<|> Poor Little Boy and Doomed to Live are part of the same person", \n "entity"<|> Poor Little Boy is clearly related to Doomed to Live because Poor Little Boy was written about in the text", \n "entity"<|> Poor Little Boy and Who Will Give You a Letter? are all related to the same event", \n "entity"<|> Poor Little Boy, Vanilla Cake, and Who Will Give You a Letter? are all clearly related to Doomed to Live because Poor Little Boy was written about in the text"]\n\n## <|COMPLETE|>'}], 'name': 'extract-continuation-0'}}
+21:17:05,840 graphrag.index.operations.extract_graph.graph_extractor ERROR error extracting graph
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "D:\app\AnaConda\Lib\contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1519, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\app\AnaConda\Lib\contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\index\operations\extract_graph\graph_extractor.py", line 118, in __call__
+    result = await self._process_document(text, prompt_variables)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\index\operations\extract_graph\graph_extractor.py", line 158, in _process_document
+    response = await self._model.achat(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\models.py", line 84, in achat
+    response = await self.model(prompt, history=history, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\llm\openai_chat_llm.py", line 94, in __call__
+    return await self._text_chat_llm(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\services\openai_tools_parsing.py", line 130, in __call__
+    return await self._delegate(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 144, in __call__
+    return await self._decorated_target(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 78, in invoke
+    return await delegate(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\cached.py", line 137, in invoke
+    result = await delegate(prompt, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\rate_limiter.py", line 75, in invoke
+    result = await delegate(prompt, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 126, in _decorator_target
+    output = await self._execute_llm(prompt, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\llm\openai_text_chat_llm.py", line 166, in _execute_llm
+    raw_response = await self._client.chat.completions.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2454, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1784, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1537, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+21:17:05,845 graphrag.callbacks.file_workflow_callbacks INFO Entity Extraction Error details={'doc_index': 0, 'text': '而是轻蔑地对凡卡说：“穷小子，撞死活该！写封信——不贴邮票，不写收信人地址，谁给你寄！”\n\n说完，便用手一撕，再一撕，再撕，再撕……手一扬，风一吹，凡卡给爷爷写的信'}
+21:17:06,102 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:18:08,623 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:19:09,318 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:20:08,768 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:21:10,430 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:22:09,497 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:23:08,259 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:24:09,17 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:25:09,517 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:26:09,927 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:27:08,560 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:28:09,112 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:29:06,505 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:30:09,105 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:31:09,355 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:32:09,889 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:33:08,526 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:51:10,65 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:52:07,804 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:53:08,470 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:56:06,66 graphrag.utils.storage INFO reading table from storage: entities.parquet
+21:56:06,72 graphrag.utils.storage INFO reading table from storage: relationships.parquet
+21:56:06,188 graphrag.utils.storage INFO reading table from storage: entities.parquet
+21:56:06,192 graphrag.utils.storage INFO reading table from storage: relationships.parquet
+21:56:06,266 graphrag.utils.storage INFO reading table from storage: text_units.parquet
+21:56:06,269 graphrag.utils.storage INFO reading table from storage: entities.parquet
+21:56:06,272 graphrag.utils.storage INFO reading table from storage: relationships.parquet
+21:56:06,367 graphrag.utils.storage INFO reading table from storage: relationships.parquet
+21:56:06,368 graphrag.utils.storage INFO reading table from storage: entities.parquet
+21:56:06,372 graphrag.utils.storage INFO reading table from storage: communities.parquet
+21:56:06,382 graphrag.index.operations.summarize_communities.graph_context.context_builder INFO Number of nodes at level=0 => 13
+21:56:10,607 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+21:57:40,997 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:01:06,450 openai._base_client INFO Retrying request to /chat/completions in 0.457014 seconds
+22:01:13,116 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:01:26,900 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:07:06,460 openai._base_client INFO Retrying request to /chat/completions in 0.405291 seconds
+22:07:16,488 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:08:06,448 openai._base_client INFO Retrying request to /chat/completions in 0.464689 seconds
+22:11:06,921 openai._base_client INFO Retrying request to /chat/completions in 0.996827 seconds
+22:11:13,973 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:11:16,478 openai._base_client INFO Retrying request to /chat/completions in 0.434146 seconds
+22:11:24,170 httpx INFO HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+22:13:13,973 graphrag.index.operations.summarize_communities.community_reports_extractor ERROR error generating community report
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 139, in _read_model_from_json
+    return json_model.model_validate(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\pydantic\main.py", line 705, in model_validate
+    return cls.__pydantic_validator__.validate_python(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for CommunityReportResponse
+rating
+  Field required [type=missing, input_value={'title': 'Firuzabad Comm...nced social welfare.'}]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 96, in invoke_json
+    return await self.try_receive_json(delegate, prompt, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 115, in try_receive_json
+    model = self._read_model_from_json(raw_json, json_model)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 142, in _read_model_from_json
+    raise FailedToGenerateValidJsonError(msg) from err
+fnllm.base.services.errors.FailedToGenerateValidJsonError: JSON response does not match the expected model, response={'title': 'Firuzabad Community Overview', 'summary': 'This community overview provides an executive summary of its key entities, relationships, and significant information associated with them.', 'impact_severity_rating': 8.5, 'rating_explanation': 'The Firuzabad community is a complex network of individuals, organizations, and institutions that interact with each other in various ways. The severity of IMPACT posed by this community can be attributed to its diverse range of entities, including governments, businesses, and non-profit organizations.', 'findings': [{'summary': 'The Firuzabad community is comprised of multiple entities, including governments, businesses, and non-profit organizations. These entities interact with each other in various ways, resulting in a complex web of relationships and interactions.', 'explanation': 'The Firuzabad community is characterized by its diverse range of entities, which include governments, businesses, and non-profit organizations. These entities interact with each other through various means, such as trade, investment, and collaboration. The complexity of these relationships can be attributed to the presence of multiple stakeholders, including individuals, organizations, and institutions.', 'insight_1_summary': 'The Firuzabad community is a complex network of individuals, organizations, and institutions that interact with each other in various ways.', 'insight_1_explanation': 'This complexity arises from the diverse range of entities within the community, including governments, businesses, and non-profit organizations. These entities have different goals, motivations, and priorities, which can lead to conflicts and challenges in maintaining stability and cooperation.'}, {'summary': 'The Firuzabad community is characterized by its strong relationships between governments and businesses. These relationships are often driven by economic interests, such as trade agreements and investment opportunities.', 'explanation': 'The presence of strong relationships between governments and businesses can be attributed to the economic benefits that these partnerships provide. Governments may seek to attract foreign investment and promote economic growth through trade agreements, while businesses may seek to expand their operations and increase profits through collaborations with government entities.', 'insight_2_summary': 'The Firuzabad community is characterized by its strong relationships between governments and businesses.', 'insight_2_explanation': 'These relationships are often driven by economic interests, such as trade agreements and investment opportunities. The presence of these relationships can lead to conflicts and challenges in maintaining stability and cooperation within the community.'}, {'summary': 'The Firuzabad community is also characterized by its complex relationships with non-profit organizations. These organizations often provide social services and support to vulnerable populations, which can create tensions between governments and businesses.', 'explanation': 'The presence of complex relationships with non-profit organizations can be attributed to the diverse range of services they provide. Non-profit organizations may seek to promote social welfare and address issues such as poverty and inequality, while governments may seek to regulate or control these activities.', 'insight_3_summary': 'The Firuzabad community is characterized by its complex relationships with non-profit organizations.', 'insight_3_explanation': 'These relationships can create tensions between governments and businesses, particularly when it comes to issues such as regulation and control. The presence of non-profit organizations can lead to conflicts over the allocation of resources and the distribution of services.'}, {'summary': 'The Firuzabad community is also characterized by its strong relationships with international organizations. These organizations often provide technical assistance and support to governments and businesses, which can help to address global challenges such as climate change and economic development.', 'explanation': 'The presence of strong relationships with international organizations can be attributed to the need for cooperation and collaboration in addressing global challenges. International organizations may seek to promote economic growth, reduce poverty, and improve living standards through their activities.', 'insight_4_summary': 'The Firuzabad community is characterized by its strong relationships with international organizations.', 'insight_4_explanation': 'These relationships are often driven by the need for cooperation and collaboration in addressing global challenges. The presence of these relationships can lead to benefits such as increased economic growth, improved living standards, and enhanced social welfare.'}]}.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 144, in __call__
+    return await self._decorated_target(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 77, in invoke
+    return await this.invoke_json(delegate, prompt, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 100, in invoke_json
+    raise FailedToGenerateValidJsonError from error
+fnllm.base.services.errors.FailedToGenerateValidJsonError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\index\operations\summarize_communities\community_reports_extractor.py", line 80, in __call__
+    response = await self._model.achat(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\models.py", line 82, in achat
+    response = await self.model(prompt, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\llm\openai_chat_llm.py", line 94, in __call__
+    return await self._text_chat_llm(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\services\openai_tools_parsing.py", line 130, in __call__
+    return await self._delegate(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 148, in __call__
+    await self._events.on_error(
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\events.py", line 26, in on_error
+    self._on_error(error, traceback, arguments)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\utils.py", line 45, in on_error
+    callbacks.error("Error Invoking LLM", error, stack, details)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\callbacks\workflow_callbacks_manager.py", line 64, in error
+    callback.error(message, cause, stack, details)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\callbacks\file_workflow_callbacks.py", line 37, in error
+    json.dumps(
+  File "D:\app\AnaConda\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type ModelMetaclass is not JSON serializable
+22:13:13,979 graphrag.callbacks.file_workflow_callbacks INFO Community Report Extraction Error details=None
+22:13:13,979 graphrag.index.operations.summarize_communities.strategies WARNING No report found for community: 0.0
+22:15:13,978 openai._base_client INFO Retrying request to /chat/completions in 0.437389 seconds
+22:18:14,419 openai._base_client INFO Retrying request to /chat/completions in 0.995103 seconds
+22:21:15,417 openai._base_client INFO Retrying request to /chat/completions in 1.573603 seconds
+22:24:16,995 openai._base_client INFO Retrying request to /chat/completions in 3.713856 seconds
+22:27:20,712 openai._base_client INFO Retrying request to /chat/completions in 6.568827 seconds
+22:30:27,284 openai._base_client INFO Retrying request to /chat/completions in 6.926890 seconds
+22:33:34,215 openai._base_client INFO Retrying request to /chat/completions in 7.637572 seconds
+22:36:41,856 openai._base_client INFO Retrying request to /chat/completions in 7.453776 seconds
+22:39:49,312 openai._base_client INFO Retrying request to /chat/completions in 6.318989 seconds
+22:42:55,635 openai._base_client INFO Retrying request to /chat/completions in 7.265984 seconds
+22:46:02,907 graphrag.index.operations.summarize_communities.community_reports_extractor ERROR error generating community report
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+  File "D:\app\AnaConda\Lib\contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\app\AnaConda\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1519, in request
+    response = await self._client.send(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+  File "D:\app\AnaConda\Lib\contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "D:\app\AnaConda\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 144, in __call__
+    return await self._decorated_target(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 77, in invoke
+    return await this.invoke_json(delegate, prompt, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 96, in invoke_json
+    return await self.try_receive_json(delegate, prompt, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\json.py", line 112, in try_receive_json
+    result = await delegate(prompt, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\cached.py", line 121, in invoke
+    result = await delegate(prompt, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\services\rate_limiter.py", line 75, in invoke
+    result = await delegate(prompt, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 126, in _decorator_target
+    output = await self._execute_llm(prompt, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\llm\openai_text_chat_llm.py", line 166, in _execute_llm
+    raw_response = await self._client.chat.completions.with_raw_response.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_legacy_response.py", line 381, in wrapped
+    return cast(LegacyAPIResponse[R], await func(*args, **kwargs))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\resources\chat\completions\completions.py", line 2454, in create
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1784, in post
+    return await self.request(cast_to, opts, stream=stream, stream_cls=stream_cls)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\openai\_base_client.py", line 1537, in request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\index\operations\summarize_communities\community_reports_extractor.py", line 80, in __call__
+    response = await self._model.achat(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\models.py", line 82, in achat
+    response = await self.model(prompt, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\llm\openai_chat_llm.py", line 94, in __call__
+    return await self._text_chat_llm(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\openai\services\openai_tools_parsing.py", line 130, in __call__
+    return await self._delegate(prompt, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\site-packages\fnllm\base\base_llm.py", line 148, in __call__
+    await self._events.on_error(
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\events.py", line 26, in on_error
+    self._on_error(error, traceback, arguments)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\language_model\providers\fnllm\utils.py", line 45, in on_error
+    callbacks.error("Error Invoking LLM", error, stack, details)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\callbacks\workflow_callbacks_manager.py", line 64, in error
+    callback.error(message, cause, stack, details)
+  File "G:\code\online-code\env-data\data\ZeroGraphRAG\graphrag\graphrag\callbacks\file_workflow_callbacks.py", line 37, in error
+    json.dumps(
+  File "D:\app\AnaConda\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "D:\app\AnaConda\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type ModelMetaclass is not JSON serializable
+22:46:02,912 graphrag.callbacks.file_workflow_callbacks INFO Community Report Extraction Error details=None
+22:46:02,912 graphrag.index.operations.summarize_communities.strategies WARNING No report found for community: 2.0
+22:46:03,10 graphrag.utils.storage INFO reading table from storage: documents.parquet
+22:46:03,14 graphrag.utils.storage INFO reading table from storage: relationships.parquet
+22:46:03,17 graphrag.utils.storage INFO reading table from storage: text_units.parquet
+22:46:03,20 graphrag.utils.storage INFO reading table from storage: entities.parquet
+22:46:03,23 graphrag.utils.storage INFO reading table from storage: community_reports.parquet
+22:46:03,28 graphrag.index.workflows.generate_text_embeddings INFO Creating embeddings
+22:46:03,28 graphrag.index.operations.embed_text.embed_text INFO using vector store lancedb with container_name default for embedding entity.description: default-entity-description
+22:46:03,67 graphrag.index.operations.embed_text.strategies.openai INFO embedding 30 inputs via 30 snippets using 2 batches. max_batch_size=16, batch_max_tokens=8191
+22:46:05,923 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:47:03,703 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:49:03,347 graphrag.index.operations.embed_text.embed_text INFO using vector store lancedb with container_name default for embedding community.full_content: default-community-full_content
+22:49:03,349 graphrag.index.operations.embed_text.strategies.openai INFO embedding 1 inputs via 1 snippets using 1 batches. max_batch_size=16, batch_max_tokens=8191
+22:50:03,281 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:51:03,123 graphrag.index.operations.embed_text.embed_text INFO using vector store lancedb with container_name default for embedding text_unit.text: default-text_unit-text
+22:51:03,128 graphrag.index.operations.embed_text.strategies.openai INFO embedding 42 inputs via 42 snippets using 3 batches. max_batch_size=16, batch_max_tokens=8191
+22:52:03,545 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:53:03,668 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:54:03,522 httpx INFO HTTP Request: POST http://localhost:11434/v1/embeddings "HTTP/1.1 200 OK"
+22:54:03,744 graphrag.cli.index INFO All workflows completed successfully.
